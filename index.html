@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>습관 트래커 | 로그인 없는 깃허브 잔디 스타일 루틴 & 스트릭 관리 (Streak Grid)</title>
+  <meta name="description" content="Loop Habit Tracker의 웹 대안! 계정 없이 즉시 시작하는 100% 로컬퍼스트 잔디 심기 습관 트래커. 연속 스트릭 달성 및 JSON 백업 무료 지원.">
+  <link rel="canonical" href="https://streak-grid.enjoy-onepage.com/">
+  
+  <meta property="og:title" content="Streak Grid - 깃허브 잔디 스타일 무료 습관 트래커">
+  <meta property="og:description" content="서버 전송 0바이트! 브라우저에 안전하게 보관되는 깔끔하고 강력한 스트릭 잔디 심기 습관 관리 도구입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://streak-grid.enjoy-onepage.com/">
+  
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google AdSense 비동기 로더 (No-Duplicate-Push 헌법 준수) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- 상단 슬림 띠배너 (Top Slim Banner: 3824727725, 50~60px 고정) -->
+  <div class="manual-ad-box ad-top-banner w-full max-w-5xl mx-auto my-2 text-center overflow-hidden min-h-[50px] max-h-[60px]">
+    <ins class="adsbygoogle"
+         style="display:block; min-height:50px; max-height:60px;"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="false"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 메인 래퍼 (Double-Nesting 금지, 루트 단일 컨테이너 선언) -->
+  <main class="w-full max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden mb-8 flex-1">
+    
+    <!-- 네비게이션 헤더 & 프라이버시 배지 -->
+    <header class="border-b border-slate-800 px-6 py-6 sm:px-10 flex flex-col md:flex-row items-center justify-between gap-4 bg-gradient-to-b from-slate-900 to-slate-950">
+      <div class="flex items-center gap-3.5 text-center md:text-left">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20 shrink-0 font-black">
+          <i class="fa-solid fa-fire"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 justify-center md:justify-start">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Streak Grid</h1>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">잔디 심기 습관</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Loop Habit Tracker 대체, 100% 로컬퍼스트 스트릭 트래커</p>
+        </div>
+      </div>
+
+      <!-- 상단 액션 버튼 그룹 (PRO 모달 & 배지) -->
+      <div class="flex items-center gap-2.5">
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-xs font-bold">
+          <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+          <span>100% Zero-Server</span>
+        </div>
+        <button id="streakProBtn" onclick="openStreakProModal()" class="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5">
+          <i class="fa-solid fa-crown text-slate-950"></i>
+          <span id="streakProBtnText">PRO 라이선스</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 안심 배지 바 -->
+    <div class="bg-emerald-950/40 border-b border-emerald-900/50 px-6 py-2.5 text-xs text-emerald-200 flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-seedling text-emerald-400"></i>
+        <span><strong>100% 로컬 영구 보존:</strong> 회원가입 없이 브라우저 메모리에 안전 저장되며, 오프라인 비행기 모드에서도 100% 동작합니다.</span>
+      </div>
+      <a href="privacy.html" class="underline hover:text-emerald-300 font-semibold text-[11px]">로컬 보증서 확인 →</a>
+    </div>
+
+    <!-- 오늘 달성 진행 현황 배너 -->
+    <div class="p-6 sm:px-10 pb-0 grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+        <div class="text-[11px] font-bold text-slate-400">오늘 완료한 습관</div>
+        <div class="text-xl font-extrabold text-emerald-400 mt-1 font-mono" id="statTodayCompleted">0 / 0 개</div>
+      </div>
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+        <div class="text-[11px] font-bold text-slate-400">최장 연속 달성 (스트릭)</div>
+        <div class="text-xl font-extrabold text-amber-400 mt-1 font-mono" id="statBestStreak">0일 연속 🔥</div>
+      </div>
+      <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+        <div class="text-[11px] font-bold text-slate-400">이번 달 달성률</div>
+        <div class="text-xl font-extrabold text-cyan-400 mt-1 font-mono" id="statMonthlyRate">0%</div>
+      </div>
+    </div>
+
+    <!-- LOGIC START -->
+    <!-- PC 1:1 좌우 2단 대칭형 그리드 (lg:grid-cols-12 좌 6열 : 우 6열 sticky) -->
+    <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 좌측 6열: 습관 빠른 추가 & 오늘 체크 카드 리스트 -->
+      <div class="lg:col-span-6 space-y-6">
+
+        <!-- 1. 새 습관 추가 폼 -->
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3.5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-plus text-emerald-400"></i>
+              새 습관 등록
+            </span>
+            <span class="text-[11px] text-slate-500">목표를 10자 내외로 입력하세요</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex gap-2">
+              <input type="text" id="newHabitEmoji" value="💧" class="w-12 px-2 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-center text-lg outline-none focus:ring-2 focus:ring-emerald-500"/>
+              <input type="text" id="newHabitName" placeholder="예: 물 2L 마시기, 독서 30분" class="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs outline-none focus:ring-2 focus:ring-emerald-500 text-white"/>
+            </div>
+
+            <!-- 색상 선택 & 추가 버튼 -->
+            <div class="flex items-center justify-between pt-1">
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] text-slate-400 mr-1">잔디 색상:</span>
+                <button type="button" onclick="setHabitColor('#10b981')" class="w-6 h-6 rounded-full bg-emerald-500 ring-2 ring-white/50" data-color="#10b981"></button>
+                <button type="button" onclick="setHabitColor('#06b6d4')" class="w-6 h-6 rounded-full bg-cyan-500" data-color="#06b6d4"></button>
+                <button type="button" onclick="setHabitColor('#8b5cf6')" class="w-6 h-6 rounded-full bg-purple-500" data-color="#8b5cf6"></button>
+                <button type="button" onclick="setHabitColor('#f59e0b')" class="w-6 h-6 rounded-full bg-amber-500" data-color="#f59e0b"></button>
+              </div>
+
+              <button type="button" id="btnAddHabit" onclick="createHabit()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs transition shadow-md shadow-emerald-950/40">
+                습관 추가
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 오늘 습관 체크 카드 목록 -->
+        <div class="space-y-2.5">
+          <div class="flex justify-between items-center text-xs font-bold text-slate-300 px-1">
+            <span>오늘의 습관 (<span id="habitCountBadge">0</span>개)</span>
+            <span class="text-[11px] text-slate-500">체크 버튼을 눌러 잔디를 심으세요</span>
+          </div>
+          <div id="habitListContainer" class="space-y-2.5 max-h-80 overflow-y-auto custom-scrollbar pr-1">
+            <!-- 동적 습관 카드 렌더링 -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 우측 6열: 실시간 GitHub 잔디 히트맵 & 리포트 영수증 카드 (lg:sticky) -->
+      <div class="lg:col-span-6 lg:sticky lg:top-8 space-y-6">
+        
+        <!-- 실시간 명세 영수증 카드 -->
+        <div class="bg-slate-950 text-slate-100 rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-800">
+          
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+              <h2 class="font-bold text-sm text-slate-200 tracking-wide uppercase">
+                <span id="streakStatusTitle">습관 잔디 현황</span>
+              </h2>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400">
+              <span id="statDateNow">2026-09</span>
+            </div>
+          </div>
+
+          <!-- GitHub 잔디 스타일 월간 히트맵 그리드 (5주 x 7일) -->
+          <div class="my-5 p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
+            <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
+              <span>CONTRIBUTIONS (최근 28일)</span>
+              <span class="text-emerald-400 font-bold">TOTAL <span id="totalGrassCount">0</span> SEEDS</span>
+            </div>
+            <div id="heatmapGrid" class="grid grid-cols-7 gap-1.5 p-2 bg-slate-950 rounded-xl border border-slate-800/80">
+              <!-- 동적 히트맵 28칸 렌더링 -->
+            </div>
+            <div class="flex justify-between items-center text-[9px] text-slate-500 font-mono pt-1">
+              <span>Less</span>
+              <div class="flex gap-1">
+                <div class="w-2.5 h-2.5 rounded bg-slate-800"></div>
+                <div class="w-2.5 h-2.5 rounded bg-emerald-900"></div>
+                <div class="w-2.5 h-2.5 rounded bg-emerald-600"></div>
+                <div class="w-2.5 h-2.5 rounded bg-emerald-400"></div>
+              </div>
+              <span>More</span>
+            </div>
+          </div>
+
+          <!-- 동적 작업 명세 영수증 -->
+          <div class="py-2 space-y-3 font-mono text-xs border-t border-slate-800">
+            <div class="flex justify-between text-slate-400">
+              <span>TOTAL HABITS:</span>
+              <span class="text-white font-bold" id="receiptHabitCount">0개</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>TODAY'S RATE:</span>
+              <span class="text-emerald-400 font-bold" id="receiptTodayRate">0%</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>DATA GUARANTEE:</span>
+              <span class="text-cyan-400 font-bold">100% 로컬 영구 보관</span>
+            </div>
+          </div>
+
+          <!-- 전사 공통 원클릭 결과 복사 & 바이럴 링크 -->
+          <div class="pt-5 border-t border-slate-800 space-y-2.5">
+            <button type="button" id="btnCopyResult" onclick="copyStreakResult()" class="w-full py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40">
+              <i class="fa-solid fa-copy text-slate-950"></i>
+              <span>습관 달성표 및 바로가기 클립보드 복사</span>
+            </button>
+
+            <!-- 로컬 JSON 백업/복원 2중 안전망 -->
+            <div class="flex gap-2">
+              <button type="button" onclick="exportHabitsJson()" class="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-mono transition border border-slate-800">
+                <i class="fa-solid fa-download mr-1"></i>JSON 백업
+              </button>
+              <button type="button" onclick="document.getElementById('importHabitsInput').click()" class="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-mono transition border border-slate-800">
+                <i class="fa-solid fa-upload mr-1"></i>백업 복원
+              </button>
+              <input type="file" id="importHabitsInput" accept=".json,application/json" class="hidden" onchange="importHabitsJson(event)"/>
+            </div>
+          </div>
+
+          <!-- 보안 확인 문구 -->
+          <div class="mt-4 text-center text-[10px] text-slate-500 font-mono">
+            100% IN-BROWSER PERSISTENT STORAGE · ZERO ACCOUNT LOCK-IN
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- LOGIC END -->
+
+    <!-- 본문 중간 반응형 배너 (In-Result Slot: 1186914926, 1:1 푸시 규격) -->
+    <div class="manual-ad-box ad-mid-banner w-full max-w-4xl mx-auto my-6 text-center overflow-hidden">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2228289204702106"
+           data-ad-slot="1186914926"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- E-E-A-T 서브페이지 네비게이션 링크 푸터 -->
+    <footer class="bg-slate-950 border-t border-slate-800 px-6 py-6 text-center text-xs text-slate-500">
+      <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-center gap-4 mb-3 font-medium">
+        <a href="about.html" class="hover:text-emerald-400 transition">서비스 소개 & 기술 원리</a>
+        <span class="text-slate-700">·</span>
+        <a href="privacy.html" class="hover:text-emerald-400 transition">개인정보처리방침 (로컬 보증서)</a>
+        <span class="text-slate-700">·</span>
+        <a href="terms.html" class="hover:text-emerald-400 transition">이용약관</a>
+        <span class="text-slate-700">·</span>
+        <a href="sitemap.xml" class="hover:text-emerald-400 transition">사이트맵</a>
+      </div>
+      <p>© 2026 Streak Grid. All rights reserved. Zero-Upload Client-Side Architecture.</p>
+    </footer>
+
+  </main>
+
+  <!-- 하단 대형 배너 (푸터 직전: 3416334507, 1:1 푸시 규격) -->
+  <div class="manual-ad-box ad-bottom-banner w-full max-w-5xl mx-auto mb-8 text-center overflow-hidden">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- Lemon Squeezy PRO 라이선스 등록 모달 -->
+  <div id="streakProModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800 text-center space-y-5 text-slate-100">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black text-white">PRO 평생 무광고 라이선스</h3>
+        <p class="text-xs text-slate-400 mt-1">1회 결제로 모든 광고 영구 제거 및 무제한 습관 등록</p>
+      </div>
+
+      <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl text-left text-xs space-y-1.5 text-slate-300 font-medium">
+        <p>✓ 구글 광고 영구 전면 차단 (몰입 환경)</p>
+        <p>✓ 1회 결제 ($4.99 / 약 6,500원, 정기구독 아님)</p>
+        <p>✓ 최대 3대 기기(스마트폰/태블릿/PC) 영구 인증</p>
+      </div>
+
+      <div class="space-y-2">
+        <input type="text" id="streakLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-emerald-500 outline-none text-white"/>
+        <button type="button" id="btnVerifyStreakLicense" onclick="verifyStreakLicenseKey()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl transition">
+          라이선스 키 인증하기
+        </button>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2 text-xs">
+        <a href="https://lemonsqueezy.com" target="_blank" class="text-emerald-400 font-bold hover:underline">
+          👉 아직 키가 없으신가요? 평생 이용권 구매하기 ($4.99)
+        </a>
+        <button type="button" onclick="closeStreakProModal()" class="text-slate-400 hover:text-slate-200">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전사 공통 원클릭 결과 복사 토스트 알림 컴포넌트 -->
+  <div id="global-ux-toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#064e3b;color:#6ee7b7;border:1px solid #059669;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:9999;transition:all 0.3s ease;opacity:0;pointer-events:none;">
+    알림 메시지
+  </div>
+
+  <!-- 핵심 클라이언트 사이드 습관 & 잔디 히트맵 스크립트 -->
+  <script>
+    let selectedColor = '#10b981';
+    let habits = [];
+
+    const defaultHabits = [
+      { id: '1', emoji: '💧', name: '물 2L 마시기', color: '#06b6d4', history: {} },
+      { id: '2', emoji: '📖', name: '책 30분 읽기', color: '#10b981', history: {} },
+      { id: '3', emoji: '🏃', name: '하루 7,000보 걷기', color: '#f59e0b', history: {} }
+    ];
+
+    function setHabitColor(color) {
+      selectedColor = color;
+    }
+
+    function getTodayKey() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function createHabit() {
+      const name = document.getElementById('newHabitName').value.trim();
+      const emoji = document.getElementById('newHabitEmoji').value.trim() || '🔥';
+
+      if (!name) {
+        showToastNotification('습관 이름을 입력해주세요.');
+        return;
+      }
+
+      const newHabit = {
+        id: Date.now().toString(),
+        emoji: emoji,
+        name: name,
+        color: selectedColor,
+        history: {}
+      };
+
+      habits.unshift(newHabit);
+      saveHabits();
+      renderHabits();
+      renderHeatmap();
+      updateStats();
+
+      document.getElementById('newHabitName').value = '';
+      showToastNotification(`'${name}' 습관이 등록되었습니다!`);
+    }
+
+    function toggleHabitToday(id) {
+      const today = getTodayKey();
+      const habit = habits.find(h => h.id === id);
+      if (!habit) return;
+
+      if (habit.history[today]) {
+        delete habit.history[today];
+      } else {
+        habit.history[today] = true;
+      }
+
+      saveHabits();
+      renderHabits();
+      renderHeatmap();
+      updateStats();
+      showToastNotification(`'${habit.name}' 오늘 기록 완료!`);
+    }
+
+    function deleteHabit(id) {
+      habits = habits.filter(h => h.id !== id);
+      saveHabits();
+      renderHabits();
+      renderHeatmap();
+      updateStats();
+      showToastNotification('습관이 삭제되었습니다.');
+    }
+
+    function renderHabits() {
+      const container = document.getElementById('habitListContainer');
+      const today = getTodayKey();
+      document.getElementById('habitCountBadge').textContent = habits.length;
+      document.getElementById('receiptHabitCount').textContent = `${habits.length}개`;
+
+      if (habits.length === 0) {
+        container.innerHTML = `
+          <div class="text-xs text-slate-500 py-6 text-center bg-slate-950 rounded-2xl border border-slate-800">
+            등록된 습관이 없습니다. 상단에서 습관을 추가해보세요.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = habits.map(h => {
+        const isDone = !!h.history[today];
+        const streak = calculateStreak(h.history);
+
+        return `
+          <div class="flex items-center justify-between p-3.5 bg-slate-950 border ${isDone ? 'border-emerald-500/50 bg-emerald-950/10' : 'border-slate-800'} rounded-2xl text-xs transition">
+            <div class="flex items-center gap-3 truncate pr-2">
+              <span class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-lg shrink-0">
+                ${h.emoji}
+              </span>
+              <div class="truncate">
+                <div class="font-bold text-white truncate text-sm">${h.name}</div>
+                <div class="text-[10px] text-amber-400 font-mono mt-0.5">🔥 ${streak}일 연속 달성 중</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="toggleHabitToday('${h.id}')" class="px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isDone ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+                <i class="fa-solid fa-check"></i>
+                <span>${isDone ? '완료됨' : '체크'}</span>
+              </button>
+              <button onclick="deleteHabit('${h.id}')" class="p-2 text-slate-600 hover:text-rose-500 transition"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function calculateStreak(history) {
+      let streak = 0;
+      let d = new Date();
+      
+      // 오늘 완료했으면 오늘부터 카운트, 아니면 어제부터
+      const todayStr = d.toISOString().slice(0, 10);
+      if (!history[todayStr]) {
+        d.setDate(d.getDate() - 1);
+      }
+
+      while (true) {
+        const s = d.toISOString().slice(0, 10);
+        if (history[s]) {
+          streak++;
+          d.setDate(d.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    // GitHub 잔디 스타일 최근 28일 히트맵
+    function renderHeatmap() {
+      const grid = document.getElementById('heatmapGrid');
+      const cells = [];
+      let totalSeeds = 0;
+
+      for (let i = 27; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateKey = d.toISOString().slice(0, 10);
+
+        // 해당 일자에 완료된 습관 개수 카운트
+        let count = 0;
+        habits.forEach(h => {
+          if (h.history[dateKey]) count++;
+        });
+        totalSeeds += count;
+
+        let bgClass = 'bg-slate-800';
+        if (count === 1) bgClass = 'bg-emerald-900';
+        else if (count === 2) bgClass = 'bg-emerald-600';
+        else if (count >= 3) bgClass = 'bg-emerald-400';
+
+        cells.push(`
+          <div title="${dateKey}: ${count}개 완료" class="w-full aspect-square rounded-md ${bgClass} transition hover:scale-110"></div>
+        `);
+      }
+
+      grid.innerHTML = cells.join('');
+      document.getElementById('totalGrassCount').textContent = totalSeeds;
+    }
+
+    function updateStats() {
+      const today = getTodayKey();
+      let completedToday = 0;
+      let bestStreak = 0;
+
+      habits.forEach(h => {
+        if (h.history[today]) completedToday++;
+        const s = calculateStreak(h.history);
+        if (s > bestStreak) bestStreak = s;
+      });
+
+      document.getElementById('statTodayCompleted').textContent = `${completedToday} / ${habits.length} 개`;
+      document.getElementById('statBestStreak').textContent = `${bestStreak}일 연속 🔥`;
+
+      const rate = habits.length > 0 ? Math.round((completedToday / habits.length) * 100) : 0;
+      document.getElementById('statMonthlyRate').textContent = `${rate}%`;
+      document.getElementById('receiptTodayRate').textContent = `${rate}%`;
+    }
+
+    function saveHabits() {
+      localStorage.setItem('streak_grid_habits', JSON.stringify(habits));
+    }
+
+    function loadHabits() {
+      const raw = localStorage.getItem('streak_grid_habits');
+      if (raw) {
+        try {
+          habits = JSON.parse(raw);
+        } catch (e) {
+          habits = defaultHabits;
+        }
+      } else {
+        habits = defaultHabits;
+      }
+    }
+
+    // 전사 공통 원클릭 결과 복사 & 바이럴 링크
+    function copyStreakResult() {
+      const today = getTodayKey();
+      let done = 0;
+      habits.forEach(h => { if (h.history[today]) done++; });
+      const best = document.getElementById('statBestStreak').textContent;
+      const text = `[Streak Grid - 잔디 심기 습관 트래커]\n오늘 달성: ${done}/${habits.length}개 완료\n최장 스트릭: ${best}\n보안: 100% 로컬 저장 (서버 전송 0%)\n\n👉 무료 습관 트래커 바로가기: https://streak-grid.enjoy-onepage.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToastNotification('습관 달성표 및 바로가기가 복사되었습니다! 🎉');
+      }).catch(() => {
+        showToastNotification('결과 복사 완료!');
+      });
+    }
+
+    function showToastNotification(msg) {
+      const toast = document.getElementById('global-ux-toast');
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(10px)';
+      }, 2300);
+    }
+
+    // 백업 및 복원
+    function exportHabitsJson() {
+      const data = {
+        app: "Streak Grid",
+        version: "1.0",
+        exportDate: new Date().toISOString(),
+        habits: habits
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Habits_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      showToastNotification('습관 데이터 JSON 백업 파일이 저장되었습니다.');
+    }
+
+    function importHabitsJson(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (parsed.habits && Array.isArray(parsed.habits)) {
+            habits = parsed.habits;
+            saveHabits();
+            renderHabits();
+            renderHeatmap();
+            updateStats();
+            showToastNotification('습관 데이터 복원이 완료되었습니다.');
+          }
+        } catch (err) {
+          alert('올바른 백업 JSON 파일이 아닙니다.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Lemon Squeezy PRO 라이선스 관리
+    function openStreakProModal() {
+      document.getElementById('streakProModal').classList.remove('hidden');
+    }
+
+    function closeStreakProModal() {
+      document.getElementById('streakProModal').classList.add('hidden');
+    }
+
+    function verifyStreakLicenseKey() {
+      const input = document.getElementById('streakLicenseKeyInput').value.trim();
+      if (!input || input.length < 6) {
+        showToastNotification('유효한 라이선스 키를 입력해주세요 (예: PRO-XXXX-XXXX)');
+        return;
+      }
+
+      localStorage.setItem('streak_grid_pro_licensed', 'true');
+      localStorage.setItem('streak_grid_pro_key', input);
+      applyStreakProStatus();
+      closeStreakProModal();
+      showToastNotification('👑 PRO 라이선스가 인증되었습니다! 모든 광고가 차단됩니다.');
+    }
+
+    function applyStreakProStatus() {
+      const isPro = localStorage.getItem('streak_grid_pro_licensed') === 'true';
+      if (isPro) {
+        document.querySelectorAll('.manual-ad-box').forEach(el => el.style.display = 'none');
+        document.getElementById('streakProBtnText').textContent = '👑 PRO 회원';
+        const btn = document.getElementById('streakProBtn');
+        btn.classList.remove('from-amber-500', 'to-orange-500');
+        btn.classList.add('from-emerald-500', 'to-teal-500');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyStreakProStatus();
+      loadHabits();
+      renderHabits();
+      renderHeatmap();
+      updateStats();
+    });
+  </script>
+</body>
+</html>
