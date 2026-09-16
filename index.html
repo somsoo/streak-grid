@@ -44,20 +44,56 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "습관 트래커 | 로그인 없는 깃허브 잔디 스타일 루틴 & 스트릭 관리 (Streak Grid)",
-  "url": "https://streak-grid.enjoy-onepage.com/",
-  "description": "Loop Habit Tracker의 웹 대안! 계정 없이 즉시 시작하는 100% 로컬퍼스트 잔디 심기 습관 트래커. 연속 스트릭 달성 및 JSON 백업 무료 지원.",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires JavaScript. Requires HTML5.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "KRW"
-  }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://streak-grid.enjoy-onepage.com/#webapp",
+      "name": "Streak Grid",
+      "url": "https://streak-grid.enjoy-onepage.com/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "description": "Loop Habit Tracker의 웹 대안! 계정 없이 즉시 시작하는 100% 로컬퍼스트 잔디 심기 습관 트래커. 연속 스트릭 달성 및 JSON 백업 무료 지원.",
+      "image": "https://streak-grid.enjoy-onepage.com/og-image.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://streak-grid.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "하루 빼먹었을 때 연속 기록이 초기화되면 의욕이 꺾여요.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "습관 연구에 따르면 하루 정도 놓치더라도 다음 날 즉시 복귀하면 장기적인 습관 형성 확률에는 거의 영향이 없습니다. '이틀 연속 빼먹지 않기' 원칙을 세우세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "여러 개의 습관을 동시에 추적할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "운동, 독서, 공부 등 최대 5개의 독립된 습관 그리드를 생성하여 멀티 잔디를 각각 심을 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "데이터가 다른 기기와도 연동되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "기본적으로 개인 브라우저의 안전한 로컬 저장소에 보관되며, '데이터 백업/복원' 기능을 통해 다른 기기로 내역을 손쉽게 옮길 수 있습니다."
+          }
+        }
+      ]
+    }
+  ]
 }
-</script>
+  </script>
 <meta content="https://streak-grid.enjoy-onepage.com/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Streak Grid - 깃허브 잔디 스타일 무료 습관 트래커" name="twitter:title"/><meta content="서버 전송 0바이트! 브라우저에 안전하게 보관되는 깔끔하고 강력한 스트릭 잔디 심기 습관 관리 도구입니다." name="twitter:description"/><meta content="https://streak-grid.enjoy-onepage.com/og-image.png" name="twitter:image"/></head>
 <body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col font-sans">
 <!-- 상단 슬림 띠배너 (Top Slim Banner: 3824727725, 50~60px 고정) -->
