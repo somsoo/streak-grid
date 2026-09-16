@@ -2,6 +2,11 @@
 
 <html lang="ko">
 <head>
+    <!-- Performance Optimization: Resource Preconnect -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>습관 트래커 | 로그인 없는 깃허브 잔디 스타일 루틴 &amp; 스트릭 관리 (Streak Grid)</title>
@@ -22,7 +27,18 @@
     .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
-  </style>
+  
+        /* U3 Accessibility: Global Keyboard Focus Ring Standard */
+        :focus-visible {
+            outline: 2px solid #3b82f6 !important;
+            outline-offset: 2px !important;
+        }
+        input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+            outline: 2px solid #2563eb !important;
+            outline-offset: 1px !important;
+        }
+    
+    </style>
 <style id="layout-shield">
   html, body {
     max-width: 100%;
@@ -168,8 +184,8 @@
 </div>
 <div class="space-y-3">
 <div class="flex gap-2">
-<input class="w-12 px-2 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-center text-lg outline-none focus:ring-2 focus:ring-emerald-500" id="newHabitEmoji" type="text" value="💧"/>
-<input class="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs outline-none focus:ring-2 focus:ring-emerald-500 text-white" id="newHabitName" placeholder="예: 물 2L 마시기, 독서 30분" type="text"/>
+<input class="w-12 px-2 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-center text-lg outline-none focus:ring-2 focus:ring-emerald-500" id="newHabitEmoji" type="text" value="💧" aria-label="Newhabitemoji" />
+<input class="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs outline-none focus:ring-2 focus:ring-emerald-500 text-white" id="newHabitName" placeholder="예: 물 2L 마시기, 독서 30분" type="text" aria-label="예: 물 2L 마시기, 독서 30분" />
 </div>
 <!-- 색상 선택 & 추가 버튼 -->
 <div class="flex items-center justify-between pt-1">
@@ -261,7 +277,7 @@
 <button class="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-mono transition border border-slate-800" onclick="document.getElementById('importHabitsInput').click()" type="button">
 <i class="fa-solid fa-upload mr-1"></i>백업 복원
               </button>
-<input accept=".json,application/json" class="hidden" id="importHabitsInput" onchange="importHabitsJson(event)" type="file"/>
+<input accept=".json,application/json" class="hidden" id="importHabitsInput" onchange="importHabitsJson(event)" type="file" aria-label="Importhabitsinput" />
 </div>
 </div>
 <!-- 보안 확인 문구 -->
@@ -401,7 +417,7 @@
 <p>✓ 최대 3대 기기(스마트폰/태블릿/PC) 영구 인증</p>
 </div>
 <div class="space-y-2">
-<input class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-emerald-500 outline-none text-white" id="streakLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" type="text"/>
+<input class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-emerald-500 outline-none text-white" id="streakLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" type="text" aria-label="라이선스 키 입력 (예: PRO-XXXX-XXXX)" />
 <button class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl transition" id="btnVerifyStreakLicense" onclick="verifyStreakLicenseKey()" type="button">
           라이선스 키 인증하기
         </button>
