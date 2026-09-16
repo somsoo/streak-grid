@@ -139,10 +139,7 @@
 <i class="fa-solid fa-shield-halved text-emerald-400"></i>
 <span>100% Zero-Server</span>
 </div>
-<button class="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5" id="streakProBtn" onclick="openStreakProModal()">
-<i class="fa-solid fa-crown text-slate-950"></i>
-<span id="streakProBtnText">PRO 라이선스</span>
-</button>
+
 </div>
 </header>
 <!-- 안심 배지 바 -->
@@ -452,34 +449,7 @@
 <ins class="adsbygoogle" data-ad-client="ca-pub-2228289204702106" data-ad-format="auto" data-ad-slot="3416334507" data-full-width-responsive="true" style="display:block"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<!-- Lemon Squeezy PRO 라이선스 등록 모달 -->
-<div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="streakProModal">
-<div class="bg-slate-900 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800 text-center space-y-5 text-slate-100">
-<div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
-<i class="fa-solid fa-crown"></i>
-</div>
-<div>
-<h3 class="text-xl font-black text-white">PRO 평생 무광고 라이선스</h3>
-<p class="text-xs text-slate-400 mt-1">1회 결제로 모든 광고 영구 제거 및 무제한 습관 등록</p>
-</div>
-<div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl text-left text-xs space-y-1.5 text-slate-300 font-medium">
-<p>✓ 구글 광고 영구 전면 차단 (몰입 환경)</p>
-<p>✓ 1회 결제 ($4.99 / 약 6,500원, 정기구독 아님)</p>
-<p>✓ 최대 3대 기기(스마트폰/태블릿/PC) 영구 인증</p>
-</div>
-<div class="space-y-2">
-<input class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-emerald-500 outline-none text-white" id="streakLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" type="text" aria-label="라이선스 키 입력 (예: PRO-XXXX-XXXX)" />
-<button class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl transition" id="btnVerifyStreakLicense" onclick="verifyStreakLicenseKey()" type="button">
-          라이선스 키 인증하기
-        </button>
-</div>
-<div class="pt-3 border-t border-slate-800 flex flex-col gap-2 text-xs">
-<a class="text-emerald-400 font-bold hover:underline" href="https://lemonsqueezy.com" target="_blank" rel="noopener noreferrer">
-          👉 아직 키가 없으신가요? 평생 이용권 구매하기 ($4.99)
-        </a>
-<button class="text-slate-400 hover:text-slate-200" onclick="closeStreakProModal()" type="button">닫기</button>
-</div>
-</div>
+
 </div>
 <!-- 전사 공통 원클릭 결과 복사 토스트 알림 컴포넌트 -->
 <div id="global-ux-toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#064e3b;color:#6ee7b7;border:1px solid #059669;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:9999;transition:all 0.3s ease;opacity:0;pointer-events:none;">
@@ -706,8 +676,9 @@
       });
     }
 
-    function showToastNotification(msg) {
+        function showToastNotification(msg) {
       const toast = document.getElementById('global-ux-toast');
+      if (!toast) return;
       toast.textContent = msg;
       toast.style.opacity = '1';
       toast.style.transform = 'translateX(-50%) translateY(0)';
@@ -756,43 +727,8 @@
       reader.readAsText(file);
     }
 
-    // Lemon Squeezy PRO 라이선스 관리
-    function openStreakProModal() {
-      document.getElementById('streakProModal').classList.remove('hidden');
-    }
-
-    function closeStreakProModal() {
-      document.getElementById('streakProModal').classList.add('hidden');
-    }
-
-    function verifyStreakLicenseKey() {
-      const input = document.getElementById('streakLicenseKeyInput').value.trim();
-      if (!input || input.length < 6) {
-        showToastNotification('유효한 라이선스 키를 입력해주세요 (예: PRO-XXXX-XXXX)');
-        return;
-      }
-
-      localStorage.setItem('streak_grid_pro_licensed', 'true');
-      localStorage.setItem('streak_grid_pro_key', input);
-      applyStreakProStatus();
-      closeStreakProModal();
-      showToastNotification('👑 PRO 라이선스가 인증되었습니다! 모든 광고가 차단됩니다.');
-    }
-
-    function applyStreakProStatus() {
-      const isPro = localStorage.getItem('streak_grid_pro_licensed') === 'true';
-      if (isPro) {
-        document.querySelectorAll('.manual-ad-box').forEach(el => el.style.display = 'none');
-        document.getElementById('streakProBtnText').textContent = '👑 PRO 회원';
-        const btn = document.getElementById('streakProBtn');
-        btn.classList.remove('from-amber-500', 'to-orange-500');
-        btn.classList.add('from-emerald-500', 'to-teal-500');
-      }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-      applyStreakProStatus();
-      loadHabits();
+loadHabits();
       renderHabits();
       renderHeatmap();
       updateStats();
