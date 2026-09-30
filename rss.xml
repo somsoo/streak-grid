@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>습관 트래커 | 로그인 없는 깃허브 잔디 스타일 루틴 &amp; 스트릭 관리 (Streak Grid)</title>
-  <link>https://streak-grid.enjoy-onepage.com/</link>
-  <description>Loop Habit Tracker의 웹 대안! 계정 없이 즉시 시작하는 100% 로컬퍼스트 잔디 심기 습관 트래커. 연속 스트릭 달성 및 JSON 백업 무료 지원.</description>
-  <language>ko-kr</language>
-  <atom:link href="https://streak-grid.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
-  <lastBuildDate>Tue, 29 Sep 2026 06:01:18 +0000</lastBuildDate>
-  <item>
-    <title>이용약관 | 습관 트래커</title>
-    <link>https://streak-grid.enjoy-onepage.com/terms.html</link>
-    <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/terms.html</guid>
-    <description>이용약관 | 습관 트래커</description>
-    <pubDate>Mon, 14 Sep 2026 12:02:57 +0900</pubDate>
-  </item>
-  <item>
-    <title>서비스 소개 &amp; 철학 | 습관 트래커</title>
-    <link>https://streak-grid.enjoy-onepage.com/about.html</link>
-    <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/about.html</guid>
-    <description>서비스 소개 &amp; 철학 | 습관 트래커</description>
-    <pubDate>Mon, 14 Sep 2026 12:02:57 +0900</pubDate>
-  </item>
-  <item>
-    <title>개인정보처리방침 &amp; 100% 로컬퍼스트 보증서 | 습관 트래커</title>
-    <link>https://streak-grid.enjoy-onepage.com/privacy.html</link>
-    <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/privacy.html</guid>
-    <description>개인정보처리방침 &amp; 100% 로컬퍼스트 보증서 | 습관 트래커</description>
-    <pubDate>Mon, 14 Sep 2026 12:02:57 +0900</pubDate>
-  </item>
-</channel>
+  <channel>
+    <title>습관 트래커 | 로그인 없는 잔디 심기 루틴·스트릭 관리</title>
+    <link>https://streak-grid.enjoy-onepage.com/</link>
+    <description>Loop Habit Tracker 웹 대안. 계정 없이 바로 쓰는 잔디 심기 습관 트래커로 연속 스트릭과 JSON 백업을 지원합니다.</description>
+    <language>ko-kr</language>
+    <lastBuildDate>Thu, 01 Oct 2026 03:32:10 +0900</lastBuildDate>
+    <atom:link href="https://streak-grid.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>습관 트래커 | 로그인 없는 잔디 심기 루틴·스트릭 관리</title>
+      <link>https://streak-grid.enjoy-onepage.com/</link>
+      <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/</guid>
+      <description>Loop Habit Tracker 웹 대안. 계정 없이 바로 쓰는 잔디 심기 습관 트래커로 연속 스트릭과 JSON 백업을 지원합니다.</description>
+      <pubDate>Thu, 01 Oct 2026 03:32:10 +0900</pubDate>
+    </item>
+    <item>
+      <title>개인정보처리방침 &amp; 100% 로컬퍼스트 보증서 | 습관 트래커</title>
+      <link>https://streak-grid.enjoy-onepage.com/privacy.html</link>
+      <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/privacy.html</guid>
+      <description>개인정보처리방침 &amp; 100% 로컬퍼스트 보증서 | 습관 트래커</description>
+      <pubDate>Mon, 14 Sep 2026 12:02:57 +0900</pubDate>
+    </item>
+    <item>
+      <title>이용약관 | 습관 트래커</title>
+      <link>https://streak-grid.enjoy-onepage.com/terms.html</link>
+      <guid isPermaLink="true">https://streak-grid.enjoy-onepage.com/terms.html</guid>
+      <description>이용약관 | 습관 트래커</description>
+      <pubDate>Mon, 14 Sep 2026 12:02:57 +0900</pubDate>
+    </item>
+  </channel>
 </rss>
